@@ -10,6 +10,7 @@
 #define FILE_NAME "todoList.txt"
 
 void info();
+void alertInvalidArgs();
 void showAvailableCommands();
 void processCommand(int argc, char *argv[]);
 void createNewTask(char *task);
@@ -36,7 +37,12 @@ int main(int argc, char *argv[])
 
 void info()
 {
-    printf("Unknown command. Type with -h to get list of commands");
+    printf("Unknown command. Type with -h to get list of commands\n");
+}
+
+void alertInvalidArgs()
+{
+    printf("Invalid arguments. Type with -h to get list of commands and arguments\n");
 }
 
 void showAvailableCommands()
@@ -54,7 +60,7 @@ int getLineCount()
     file = fopen(FILE_NAME, "r");
     if(file == NULL)
     {
-        printf("Currently you don't have any todo's");
+        printf("Currently you don't have any todo's\n");
         return 0;
     }
     
@@ -85,13 +91,13 @@ void createNewTask(char *task)
 
     if(file == NULL)
     {
-        printf("Error opening file");
+        printf("Error opening file\n");
         exit(1);
     }
 
     fprintf(file, "%s", strcat(task, ";0\n"));
     fclose(file);
-    printf("Task added to list successefully");
+    printf("Task added to list successefully\n");
 }
 
 void getAllTasks()
@@ -101,7 +107,7 @@ void getAllTasks()
 
     if(file == NULL)
     {
-        printf("Error can't get todo's list");
+        printf("Error can't get todo's list or list is empty");
         exit(2);
     }
 
@@ -131,7 +137,7 @@ void markCompleted(int id)
 
     if(src == NULL || dst == NULL)
     {
-        printf("Error can't get todo's list");
+        printf("Error can't get todo's list or list is empty\n");
         exit(3);
     }
 
@@ -169,7 +175,7 @@ void processCommand(int argc, char *argv[])
         break;
     case V:
         printf("SimpleToDo version 1.00\n");
-        printf("Author Vladislav Ryzovas");
+        printf("Author Vladislav Ryzovas\n");
         break;
     case L:
         getAllTasks();
